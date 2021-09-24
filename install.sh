@@ -12,6 +12,7 @@ pip3 install virtualenv
 echo "${green}>>> clone git repo ${reset}"
 
 git clone https://github.com/minaaaatef/blink
+
 cd blink
 cd BackEnd
 echo "${green}>>> Creating virtualenv${reset}"
@@ -25,6 +26,7 @@ echo "${green}>>> Installing honcho to run ProcFile${reset}"
 pip install honcho
 echo "${green}>>> Installing npm packages${reset}"
 cd ../FrontEnd/vuetify-basic-components-master
+mv .env.production .env
 npm install
 echo "${green}>>> Running ProcFile ${reset}"
 cd ../../
