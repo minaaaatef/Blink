@@ -17,7 +17,7 @@ export default {
   data: () => ({
 
     LoanTermList: {
-      url: 'http://127.0.0.1:8000/loan-term',
+      url: process.env.VUE_APP_API_URL + '/loan-term',
       attribue: [
         { name: 'max', type: 'text', data: '' },
         { name: 'min', type: 'text', data: '' },
@@ -36,7 +36,7 @@ export default {
               method: 'DELETE',
               headers: { Authorization: 'Token ' + this.token, 'Content-Type': 'application/json' }
             }
-            fetch('http://127.0.0.1:8000/loan-term/' + id, requestOptions)
+            fetch(process.env.VUE_APP_API_URL + '/loan-term/' + id, requestOptions)
               .then(response => {
                 window.location.reload()
               })

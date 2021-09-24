@@ -12,7 +12,7 @@ import ListObjects from '../../components/ListObjects'
 export default {
   data: () => ({
     FundList: {
-      url: 'http://127.0.0.1:8000/loan',
+      url: process.env.VUE_APP_API_URL + '/loan',
       attribue: [
 
         { name: 'amount', type: 'number', data: '' },
@@ -43,7 +43,7 @@ export default {
               headers: { Authorization: 'Token ' + this.token, 'Content-Type': 'application/json' },
               body: JSON.stringify(data)
             }
-            fetch('http://127.0.0.1:8000/loan/' + item.id, requestOptions)
+            fetch(process.env.VUE_APP_API_URL + '/loan/' + item.id, requestOptions)
               .then(response => {
                 window.location.reload()
               })

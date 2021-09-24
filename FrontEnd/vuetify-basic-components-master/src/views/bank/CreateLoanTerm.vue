@@ -93,7 +93,7 @@ export default {
       headers: { Authorization: 'Token ' + this.token }
     }
 
-    fetch('http://127.0.0.1:8000/Attribute', requestOptions)
+    fetch(process.env.VUE_APP_API_URL + '/Attribute', requestOptions)
       .then(response => {
         response.json().then(data => {
           console.log(data)
@@ -124,7 +124,7 @@ export default {
 
       }
 
-      fetch('http://127.0.0.1:8000/loan-term', requestOptions)
+      fetch(process.env.VUE_APP_API_URL + '/loan-term', requestOptions)
         .then(response => {
           response.json().then(data => {
             console.log(data)

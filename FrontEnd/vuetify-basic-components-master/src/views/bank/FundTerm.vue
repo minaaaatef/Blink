@@ -17,7 +17,7 @@ export default {
   data: () => ({
 
     LoanFundTermList: {
-      url: 'http://127.0.0.1:8000/loan-fund-term',
+      url: process.env.VUE_APP_API_URL + '/loan-fund-term',
       attribue: [
         { name: 'Type', type: 'select', data: { 1: 'Yearly', 2: 'Monthly', 3: 'Quarterly' } },
         { name: 'max', type: 'text', data: '' },
@@ -35,7 +35,7 @@ export default {
               method: 'DELETE',
               headers: { Authorization: 'Token ' + this.token, 'Content-Type': 'application/json' }
             }
-            fetch('http://127.0.0.1:8000/loan-fund-term/' + id, requestOptions)
+            fetch(process.env.VUE_APP_API_URL + '/loan-fund-term/' + id, requestOptions)
               .then(response => {
                 window.location.reload()
               })

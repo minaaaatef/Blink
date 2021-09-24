@@ -39,7 +39,7 @@ export default {
       headers: { Authorization: 'Token ' + this.token }
     }
 
-    fetch('http://127.0.0.1:8000/Attribute', requestOptions)
+    fetch(process.env.VUE_APP_API_URL + '/Attribute', requestOptions)
       .then(response => {
         response.json().then(data => {
           console.log(data)
@@ -52,6 +52,7 @@ export default {
   },
 
   beforeMount() {
+    console.log(process.env.VUE_APP_API_URL)
     const myStorage = window.localStorage
     this.token = myStorage.getItem('token')
     this.username = myStorage.getItem('username')
