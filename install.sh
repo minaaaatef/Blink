@@ -4,8 +4,7 @@ reset=`tput sgr0`
 echo "${green}>>> Update apt ${reset}"
 sudo apt update
 echo "${green}>>> install nodejs & npm & python ${reset}"
-sudo apt install nodejs npm
-apt install python3-pip
+sudo apt install nodejs npm python3-pip
 
 echo "${green}>>> install virtualenv ${reset}"
 pip3 install virtualenv 
