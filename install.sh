@@ -1,6 +1,16 @@
 green=`tput setaf 2`
 reset=`tput sgr0`
 
+echo "${green}>>> Update apt ${reset}"
+sudo apt update
+echo "${green}>>> install nodejs & npm ${reset}"
+sudo apt install nodejs npm
+
+echo "${green}>>> install virtualenv ${reset}"
+pip3 install virtualenv 
+
+echo "${green}>>> clone git repo ${reset}"
+
 git clone https://github.com/minaaaatef/blink
 cd blink
 cd BackEnd
