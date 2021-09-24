@@ -1,0 +1,124 @@
+<template>
+  <v-card class="mt-8">
+    <v-card-title>
+      Create Loan Fund Term
+    </v-card-title>
+    <v-card-text>
+      Create New Loan Fund Term
+      <v-form>
+        <v-select
+          v-model="type"
+          :items="typeSelect"
+          :item-text="text"
+          :item-value="value"
+          :rules="[v => !!v || 'Item is required']"
+          label="Fund Type"
+          required
+        ></v-select>
+        <v-text-field
+          v-model="max"
+          label="MAX"
+          required
+          type="number"
+        ></v-text-field>
+        <v-text-field
+          v-model="min"
+          label="MIN"
+          required
+          type="number"
+
+        ></v-text-field>
+        <v-text-field
+          v-model="interestRate"
+          label="interestRate %"
+          required
+          type="number"
+
+        ></v-text-field>
+        <v-text-field
+          v-model="duration"
+          label="duration"
+          required
+          type="number"
+
+        ></v-text-field>
+        <v-btn class="success" @click="submit">Submit</v-btn>
+      </v-form>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script>
+export default {
+
+  data: () => ({
+    typeSelect: [
+      {
+        text: 'Yearly',
+        value: 1
+      },
+      {
+        text: 'Monthly',
+        value: 2
+      },
+      {
+        text: 'Quarterly',
+        value: 3
+      }
+    ],
+    type: '',
+    max: '',
+    min: '',
+    interestRate: '',
+    duration: '',
+    token: ''
+  }),
+  mounted() {
+    this.token = window.localStorage.getItem('token')
+
+    const requestOptions = {
+      method: 'GET',
+      headers: { Authorization: 'Token ' + this.token }
+    }
+
+    fetch('http://127.0.0.1:8000/Attribute', requestOptions)
+      .then(response => {
+        response.json().then(data => {
+          console.log(data)
+          this.interestRate = data.interestRate
+        })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  },
+  methods: {
+    submit() {
+      this.token = window.localStorage.getItem('token')
+      const data = {
+        max: this.max,
+        min: this.min,
+        interestRate: this.interestRate,
+        duration: this.duration,
+        Type: this.type
+      }
+      const requestOptions = {
+        method: 'POST',
+        headers: { Authorization: 'Token ' + this.token, 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+
+      }
+      fetch('http://127.0.0.1:8000/loan-fund-term', requestOptions)
+        .then(response => {
+          response.json().then(data => {
+            console.log(data)
+            this.$router.push({ name: 'home' })
+          })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+  }
+}
+</script>
