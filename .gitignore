@@ -2,3 +2,4 @@ BackEnd/venv
 FrontEnd/node_modules
 */.idea
 *.pyc
+FrontEnd/vuetify-basic-components-master/.env
