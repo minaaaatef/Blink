@@ -26,7 +26,7 @@ echo "${green}>>> Installing honcho to run ProcFile${reset}"
 pip install honcho
 echo "${green}>>> Installing npm packages${reset}"
 cd ../FrontEnd/vuetify-basic-components-master
-mv .env.production .env
+# mv .env.production .env
 npm install
 echo "${green}>>> Running ProcFile ${reset}"
 cd ../../
