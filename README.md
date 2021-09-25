@@ -1,6 +1,8 @@
 # Blink
 A loan system app made with Django Rest Framework and Vuetify
 
+[Document](https://docs.google.com/document/d/1VuvJ_6CeS-x1r8AJC2OuXfXEYkJgGlJpZldUSplOvxA/edit)
+
 ## Running Environment
 Using [Honcho](https://honcho.readthedocs.io/) and Procfile to run Django and Vue in the background Proccess 
 
