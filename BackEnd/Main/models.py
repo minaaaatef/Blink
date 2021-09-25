@@ -37,7 +37,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class LoansFunds(models.Model):
     provider = models.ForeignKey(User, on_delete=models.PROTECT)
-    bankPersonnal = models.ForeignKey(User, on_delete=models.PROTECT, related_name='loanFunds', null=True, blank=True)
+    bankPersonnal = models.ForeignKey(User, on_delete=models.PROTECT, related_name='loanFundsApproved', null=True, blank=True)
     loanFundTerm = models.ForeignKey('LoanFundTerm', on_delete=models.PROTECT, related_name='loanFunds')
     amount = models.IntegerField()
     startDate = models.DateField()
@@ -138,6 +138,11 @@ class FundsInstallments(models.Model):
     amount = models.FloatField(null=False, blank=False)
     paid = models.BooleanField(default=False)
 
+    @property
+    def canPay(self):
+        attribute = Attribute.get_solo()
+        return self.amount < attribute.bankAccountMoney
+
 
 class Attribute(SingletonModel):
     interestRate = models.FloatField(default=0.07)
@@ -146,3 +151,4 @@ class Attribute(SingletonModel):
     bankAccountMoney = models.FloatField(default=100000)
     maxAcceptedLoanFund = models.IntegerField(default=500000)
     maxAcceptedLoan = models.IntegerField(default=100000)
+
