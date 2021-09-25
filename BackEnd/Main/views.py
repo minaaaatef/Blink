@@ -492,7 +492,7 @@ class PayFund(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
         attribute = Attribute.get_solo()
-        if instance.amount < attribute.bankAccountMoney:
+        if instance.canPay:
             instance.paid = True
             instance.save()
             updateBankMoney(-instance.amount)
