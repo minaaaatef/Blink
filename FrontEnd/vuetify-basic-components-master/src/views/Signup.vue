@@ -40,7 +40,7 @@
             label="Role"
             required
           ></v-select>
-          <v-btn color="success" class="mr-4" @click="lofin">
+          <v-btn color="success" class="mr-4" @click="submit">
             submit
           </v-btn>
           <p>Already a user? <a @click="toLogin">Login</a></p>
@@ -58,7 +58,7 @@ export default {
     const token = myStorage.getItem('token')
     console.log(token)
     if (token !== null) {
-      window.location.href = 'blog'
+      window.location.href = 'home'
     }
   },
 
@@ -111,7 +111,7 @@ export default {
             window.localStorage.setItem('username', data.username)
             window.localStorage.setItem('userType', data.userType)
             window.localStorage.setItem('userRoles', data.userRoles)
-            window.location.href = 'blog'
+            window.location.href = 'home'
           })
         })
         .catch(function(error) {
