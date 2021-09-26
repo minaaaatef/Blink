@@ -8,6 +8,8 @@ Using [Honcho](https://honcho.readthedocs.io/) and Procfile to run Django and Vu
 
 
 ## Installment
+The command below will run the installment script which downloads all the required packages.
+
 ```
 bash <(wget -O - https://raw.githubusercontent.com/minaaaatef/Blink/master/install.sh)
 ```
@@ -19,7 +21,7 @@ Navigate to the parent directory of the project and run this command
 honcho start
 ```
 
-## To Stop
+## Stop
 Run the command bleow to stop the honcho proccess 
 ```
 pkill honcho*
