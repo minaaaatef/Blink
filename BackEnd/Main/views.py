@@ -302,7 +302,8 @@ class LoanFundViewId(generics.RetrieveUpdateDestroyAPIView):
 
             instance.save()
             if updateBankMoneyFlag:
-                updateBankMoney(instance.amount)
+                if not updateBankMoney(instance.amount):
+                    return Response(data={'message': 'No enough money'}, status=status.HTTP_400_BAD_REQUEST)
 
             serializer = self.serializer_class(instance=instance)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -419,7 +420,8 @@ class LoanViewId(generics.RetrieveUpdateDestroyAPIView):
 
             instance.save()
             if updateBankMoneyFlag:
-                updateBankMoney(-instance.amount)
+                if not updateBankMoney(-instance.amount):
+                    return Response(data={'message': 'No enough money'}, status=status.HTTP_400_BAD_REQUEST)
 
             serializer = self.serializer_class(instance=instance)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -477,7 +479,8 @@ class PayLoan(generics.GenericAPIView):
         if instance.loan.customer == self.request.user:
             instance.paid = True
             instance.save()
-            updateBankMoney(instance.amount)
+            if not updateBankMoney(instance.amount):
+                return Response(data={'message': 'No enough money'}, status=status.HTTP_400_BAD_REQUEST)
             return Response(status=status.HTTP_200_OK)
 
 
@@ -495,7 +498,9 @@ class PayFund(generics.GenericAPIView):
         if instance.canPay:
             instance.paid = True
             instance.save()
-            updateBankMoney(-instance.amount)
+            if not updateBankMoney(-instance.amount):
+                return Response(data={'message': 'No enough money'}, status=status.HTTP_400_BAD_REQUEST)
+
             return Response(status=status.HTTP_200_OK)
 
         else:

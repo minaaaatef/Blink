@@ -6,5 +6,8 @@ from django.db import transaction
 def updateBankMoney(value):
     attribute = Attribute.get_solo()
     attribute.bankAccountMoney += value
-    attribute.save()
-    pass
+    if attribute.bankAccountMoney > 0:
+        attribute.save()
+        return True
+    else:
+        return False
